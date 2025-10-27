@@ -1,3 +1,4 @@
+import BottomHeader from "./BottomHeader";
 import MiddleHeader from "./MiddleHeader";
 import TopHeader from "./TopHeader";
 
@@ -9,7 +10,7 @@ const Header = () => {
       {/* Middle header */}
       <MiddleHeader />
       {/* Bottom heade */}
-      <h1>Bottom header</h1>
+      <BottomHeader />
     </header>
   );
 };
