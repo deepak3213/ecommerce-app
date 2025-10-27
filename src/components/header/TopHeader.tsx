@@ -1,6 +1,7 @@
 import { CiDeliveryTruck } from "react-icons/ci";
 import Container from "../Container";
 import LanguageDropdown from "./LanguageDropdown";
+import CurrencyDropdown from "./CurrencyDropdown";
 const TopHeader = () => {
   return (
     <div className="bg-[#010f1c] text-gray-200 w-full">
@@ -9,8 +10,9 @@ const TopHeader = () => {
           <CiDeliveryTruck className="text-2xl mr-1 text-[#ffb342]" />
           FREE Express Shipping On Orders $8+
         </p>
-        <div>
+        <div className="hidden md:inline-flex items-center text-sm text-white gap-1 ">
           <LanguageDropdown />
+          <CurrencyDropdown />
         </div>
       </Container>
     </div>

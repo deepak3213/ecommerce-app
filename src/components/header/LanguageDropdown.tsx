@@ -23,7 +23,7 @@ const languageDropdown = () => {
   return (
     <div className="relative">
       <button
-        className="flex items-center gap-1  cursor-pointer hover:text-orange-300 transition-colors"
+        className="headerTopMenu flex items-center gap-1  cursor-pointer hover:text-orange-300 transition-colors"
         onClick={() => setIsOpen(!isOpen)}
       >
         <span className="hidden sm:inline">{selectedLanguage.flag}</span>
