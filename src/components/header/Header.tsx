@@ -1,3 +1,4 @@
+import MiddleHeader from "./MiddleHeader";
 import TopHeader from "./TopHeader";
 
 const Header = () => {
@@ -6,7 +7,7 @@ const Header = () => {
       {/* Top header */}
       <TopHeader />
       {/* Middle header */}
-      <h1>Middle header</h1>
+      <MiddleHeader />
       {/* Bottom heade */}
       <h1>Bottom header</h1>
     </header>
