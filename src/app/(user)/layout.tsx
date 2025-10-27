@@ -1,10 +1,11 @@
+import Header from "@/components/header/Header";
 import { ReactNode } from "react";
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="bg-yellow-500">
-      <h1>This is me! fuck up!</h1>
+    <main className="bg-yellow-500 p-0 m-0">
+      <Header />
       {children}
-    </div>
+    </main>
   );
 }
