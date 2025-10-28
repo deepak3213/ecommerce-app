@@ -4,7 +4,7 @@ import TopHeader from "./TopHeader";
 
 const Header = () => {
   return (
-    <header className="w-full bg-theme-white sticky top-1 z-50">
+    <header className="w-full bg-theme-white sticky top-0 z-50">
       {/* Top header */}
       <TopHeader />
       {/* Middle header */}
