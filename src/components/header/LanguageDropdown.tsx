@@ -1,5 +1,6 @@
 "use client";
 
+import useOnClickOutside from "@/hooks/useOnClickOutside";
 import { useState } from "react";
 import { FiCheck } from "react-icons/fi";
 import { IoChevronDownSharp } from "react-icons/io5";
@@ -15,13 +16,14 @@ const languages = [
 const languageDropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedLanguage, setSelectedLangauge] = useState(languages[0]);
+  const { popOverRef } = useOnClickOutside(() => setIsOpen(false), isOpen);
   function handleLanguageSelect(language: (typeof languages)[0]) {
     if (!language.available) return;
     setSelectedLangauge(language);
     setIsOpen(false);
   }
   return (
-    <div className="relative">
+    <div className="relative" ref={popOverRef}>
       <button
         className="headerTopMenu flex items-center gap-1  cursor-pointer hover:text-orange-300 transition-colors"
         onClick={() => setIsOpen(!isOpen)}
