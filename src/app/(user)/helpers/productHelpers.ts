@@ -21,3 +21,21 @@ export const getCategoriesWithCounts = (products: ProductType[]) => {
     url: `/products?category=${category.replace(/\s+/g, "-").toLowerCase()}`,
   }));
 };
+
+// Helper function to get best sellers(products with high rating and good reviews)
+
+export const getBestSellers = (products: ProductType[]): ProductType[] => {
+  //   if (!products || products.length === 0) return [];
+  console.log(products);
+  let bestSellers = products.filter(
+    (product) => product.rating > 4 && product.reviews?.length >= 3
+  );
+  // .sort((a, b) => {
+  //   // Sort by rating first, then by number of reviews
+  //   if (b.rating !== a.rating) {
+  //     return b.rating - a.rating;
+  //   }
+  //   return (b.reviews?.length || 0) - (a.reviews?.length || 0);
+  // });
+  return bestSellers;
+};

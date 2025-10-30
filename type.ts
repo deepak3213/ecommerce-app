@@ -1,3 +1,9 @@
+type Review = {
+  reviewerName: string;
+  rating: number;
+  comment: string;
+  reviewerEmail: string;
+};
 export interface ProductType {
   availabilityStatus: string;
   brand: string;
@@ -31,4 +37,12 @@ export interface ProductType {
   warrantyInformation: string;
   weight: number;
   quantity?: number;
+}
+
+export interface StateType {
+  shopy: {
+    cart: ProductType[];
+    favorite: ProductType[];
+    userInfo: any;
+  };
 }
