@@ -3,8 +3,12 @@ import { ProductType } from "../../type";
 import { FaStar } from "react-icons/fa";
 import Button from "./ui/Button";
 import AddToCartButton from "./AddToCartButton";
+import ProductPrice from "./ProductPrice";
 
 const ProductCard = ({ product }: { product: ProductType }) => {
+  const regularPrice = product?.price;
+  const discountedPrice =
+    product?.price - (product?.price * product?.discountPercentage) / 100;
   return (
     <div className="bg-white border overflow-hidden border-gray-200 rounded-xl group hover:shadow-xl hover:shadow-black/10 transition-all duration-200">
       {/* image section */}
@@ -72,6 +76,13 @@ const ProductCard = ({ product }: { product: ProductType }) => {
               In Stock
             </span>
           )}
+        </div>
+        <div className="mb-3">
+          <ProductPrice
+            regularPrice={regularPrice}
+            discountedPrice={discountedPrice}
+            product={product}
+          />
         </div>
         <AddToCartButton product={product} />
       </div>

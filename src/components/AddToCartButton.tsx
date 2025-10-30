@@ -1,6 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import { ProductType, StateType } from "../../type";
-import { addToCart, productIsInCart } from "@/redux/shofySlice";
+import {
+  addToCart,
+  decreaseQuantity,
+  increaseQuanity,
+  productIsInCart,
+} from "@/redux/shofySlice";
 import { FaMinus, FaPlus, FaShoppingCart } from "react-icons/fa";
 import { useState } from "react";
 import { twMerge } from "tailwind-merge";
@@ -40,6 +45,35 @@ const AddToCartButton = ({
       });
     }, 400);
   }
+  function handleIncreaseQuantity() {
+    dispatch(increaseQuanity(product?.id));
+    toast.success(`Quantity increased!`, {
+      duration: 2000,
+      style: {
+        background: "#10B981",
+        color: "white",
+      },
+    });
+  }
+  function handleDecreaseQuantity() {
+    if (existingProduct?.quantity! > 1) {
+      dispatch(decreaseQuantity(product?.id));
+      toast.success(`Quantity decreased!`, {
+        duration: 2000,
+        style: {
+          background: "#10B981",
+          color: "white",
+        },
+      });
+    } else {
+      toast.error("Minimum quantity is 1", {
+        style: {
+          background: "#EF4444",
+          color: "white",
+        },
+      });
+    }
+  }
 
   // Base styles for different variants
   const getVariantStyles = () => {
@@ -70,7 +104,11 @@ const AddToCartButton = ({
     <>
       {existingProduct && showQuantity ? (
         <div className="flex items-center justify-center gap-2 bg-white rounded-lg border border-gray-200 p-1 shadow-sm">
-          <button className="h-8 w-8 flex items-center justify-center bg-gray-100 hover:bg-red-100 text-gray-600 hover:text-red-600 rounded-md border transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-gray-100 disabled:hover:text-gray-600">
+          <button
+            disabled={existingProduct?.quantity! <= 1}
+            className="h-8 w-8 flex items-center justify-center bg-gray-100 hover:bg-red-100 text-gray-600 hover:text-red-600 rounded-md border transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-gray-100 disabled:hover:text-gray-600"
+            onClick={handleDecreaseQuantity}
+          >
             <FaMinus className="h-3 w-3" />
           </button>
           <div className="flex flex-col items-center min-w-10">
@@ -79,7 +117,10 @@ const AddToCartButton = ({
             </span>
             <span className="text-xs text-gray-500">in cart</span>
           </div>
-          <button className="h-8 w-8 flex items-center justify-center bg-gray-100 hover:bg-green-100 text-green-600 hover:text-green-600 rounded-md border transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-gray-100 disabled:hover:text-gray-600">
+          <button
+            className="h-8 w-8 flex items-center justify-center bg-gray-100 hover:bg-green-100 text-green-600 hover:text-green-600 rounded-md border transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-gray-100 disabled:hover:text-gray-600"
+            onClick={handleIncreaseQuantity}
+          >
             <FaPlus />
           </button>
         </div>
