@@ -3,8 +3,17 @@ import { ProductType } from "../../../type";
 import { IoClose } from "react-icons/io5";
 import AddToCartButton from "../AddToCartButton";
 import PriceFormat from "../PriceFormat";
+import { FaCheck } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { removeFromCart } from "@/redux/shofySlice";
+import toast from "react-hot-toast";
 
 const CartProduct = ({ product }: { product: ProductType }) => {
+  const dispatch = useDispatch();
+  const handleRemoveProduct = () => {
+    dispatch(removeFromCart(product?.id));
+    toast.success(`${product?.title.substring(0, 20)} deleted successfully!`);
+  };
   return (
     <div className="bg-white/10 py-6 sm:py-10 flex ">
       <Link
@@ -39,11 +48,34 @@ const CartProduct = ({ product }: { product: ProductType }) => {
           {/* close button */}
           <div className="mt-4 sm:mt-0 sm:pr-9">
             <div className="absolute right-0 top-0">
-              <button className="p-1 flex items-center justify-center bg-gray-100 hover:bg-red-100 text-gray-600 hover:text-red-600 rounded-md border transition-all duration-200 ">
+              <button
+                className="p-1 flex items-center justify-center bg-gray-100 hover:bg-red-100 text-gray-600 hover:text-red-600 rounded-md border transition-all duration-200 "
+                onClick={handleRemoveProduct}
+              >
                 <IoClose className="h-4 w-4" />
               </button>
             </div>
           </div>
+        </div>
+        <div>
+          {product?.availabilityStatus && (
+            <p className="mt-4 flex space-x-2 text-sm tex-gray-700">
+              <FaCheck className="text-lg text-green-500" />
+              <span>In Stock</span>
+            </p>
+          )}
+          <p className="text-sm">
+            You are saving{" "}
+            <PriceFormat
+              className="text-semibold text-green-500"
+              amount={
+                product?.price *
+                (product?.discountPercentage / 100) *
+                product.quantity!
+              }
+            />{" "}
+            upon purchase
+          </p>
         </div>
       </div>
     </div>

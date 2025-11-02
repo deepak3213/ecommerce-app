@@ -1,13 +1,26 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { RiCloseLine, RiSearchLine } from "react-icons/ri";
-import SearchResultsBox from "./SearchResultsBos";
+import SearchResultsBox from "./SearchResultsBox";
+import useProductSearch from "@/hooks/useProductSearch";
+import useOnClickOutside from "@/hooks/useOnClickOutside";
 
 const SearchInput = () => {
   const [isInputFocused, setInputFocused] = useState(false);
   const [search, setSearch] = useState("");
+  const { searchedProducts, defaultProducts, isLoading } =
+    useProductSearch(search);
+  const { popOverRef } = useOnClickOutside(handleItemClick, isInputFocused);
+  function handleItemClick() {
+    console.log("clicked");
+    setSearch("");
+    setInputFocused(false);
+  }
   return (
-    <div className="h-10 relative hidden md:inline-flex flex-1 ">
+    <div
+      ref={popOverRef}
+      className="h-10 relative hidden md:inline-flex flex-1 "
+    >
       <input
         placeholder="Search products here..."
         type="text"
@@ -26,7 +39,15 @@ const SearchInput = () => {
         <RiSearchLine />
       </span>
       {/* not functional yet */}
-      {/* {isInputFocused && <SearchResultsBox search={search} />} */}
+      {isInputFocused && (
+        <SearchResultsBox
+          search={search}
+          searchedProducts={searchedProducts}
+          defaultProducts={defaultProducts}
+          isLoading={isLoading}
+          handleItemClick={handleItemClick}
+        />
+      )}
     </div>
   );
 };

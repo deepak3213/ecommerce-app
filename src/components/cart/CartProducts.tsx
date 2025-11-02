@@ -2,6 +2,8 @@
 import { useSelector } from "react-redux";
 import { ProductType, StateType } from "../../../type";
 import CartProduct from "./CartProduct";
+import CartSummary from "./CartSummary";
+import Link from "next/link";
 
 const CartProducts = () => {
   const { cart } = useSelector((state: StateType) => state?.shopy);
@@ -21,12 +23,27 @@ const CartProducts = () => {
               ))}
             </section>
             {/* cart summary */}
+            <CartSummary cart={cart} />
           </div>
         </>
       ) : (
-        <>
-          <h1>Cart is empty</h1>
-        </>
+        <div className="bg-white h-96  my-10 flex flex-col gap-4 items-center justify-center py-5 rounded-lg border border-gray-200 drop-shadow-2xl">
+          <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+            Shopping Cart
+          </h1>
+          <p className="text-base max-w-[700px] text-center text-gray-600 tracking-wide leading-6">
+            Your cart is empty. Lorem ipsum dolor sit amet consectetur
+            adipisicing elit. Voluptate in ab blanditiis officiis deleniti, amet
+            omnis esse quisquam voluptates, eveniet, illo magnam error odit modi
+            cumque minima a fugit aut.
+          </p>
+          <Link
+            className="bg-sky-color/90 text-gray-100 px-8 py-4 rounded-md hover:bg-sky-color duration-200 uppercase text-sm font-semibold tracking-wide"
+            href="/"
+          >
+            go to shopping
+          </Link>
+        </div>
       )}
     </>
   );

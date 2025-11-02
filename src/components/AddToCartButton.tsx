@@ -4,7 +4,6 @@ import {
   addToCart,
   decreaseQuantity,
   increaseQuanity,
-  productIsInCart,
 } from "@/redux/shofySlice";
 import { FaMinus, FaPlus, FaShoppingCart } from "react-icons/fa";
 import { useState } from "react";

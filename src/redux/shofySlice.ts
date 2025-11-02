@@ -41,6 +41,9 @@ export const shofySlice = createSlice({
         existingProduct.quantity! -= 1;
       }
     },
+    removeFromCart: (state, action) => {
+      state.cart = state.cart.filter((item) => item.id !== action.payload);
+    },
   },
 });
 
@@ -51,6 +54,6 @@ export const productIsInCart = (
 ): boolean => {
   return state.shopy.cart.some((item) => item.id === productId);
 };
-export const { addToCart, increaseQuanity, decreaseQuantity } =
+export const { addToCart, increaseQuanity, decreaseQuantity, removeFromCart } =
   shofySlice.actions;
 export default shofySlice.reducer;

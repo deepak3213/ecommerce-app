@@ -11,8 +11,7 @@ export default async function Home() {
   const allProducts = productsData?.products || [];
   // categorize all products
   const bestSellers = getBestSellers(allProducts);
-  const newArrivals = [];
-  const offers = [];
+
   return (
     <main>
       <Banner />
