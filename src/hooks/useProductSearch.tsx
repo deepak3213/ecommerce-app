@@ -20,7 +20,7 @@ export default function useProductSearch(search: string) {
       .then((res) => res.json())
       .then((data) => setDefaultProducts((data?.products || []).slice(0, 10)));
   }, []);
-  async function fetchProducts(signal) {
+  async function fetchProducts(signal: AbortSignal) {
     try {
       setIsLoading(true);
       const res = await fetch(
@@ -29,14 +29,14 @@ export default function useProductSearch(search: string) {
       );
       const data = await res.json();
       setSearchedProducts(data.products);
-    } catch (err: any) {
-      if (err.name !== "AbortError") {
-        console.error("Fetch failed:", err);
-      }
+    } catch (err) {
+      if (err instanceof DOMException && err.name === "AbortError") return;
+      console.error("Fetch failed:", err);
     } finally {
       setIsLoading(false);
     }
   }
+
   useEffect(() => {
     const controller = new AbortController();
     if (!search.trim()) {
