@@ -1,3 +1,4 @@
+"use client";
 import { useSelector } from "react-redux";
 import { StateType } from "../../type";
 import PriceFormat from "./PriceFormat";

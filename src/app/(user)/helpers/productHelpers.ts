@@ -26,7 +26,6 @@ export const getCategoriesWithCounts = (products: ProductType[]) => {
 
 export const getBestSellers = (products: ProductType[]): ProductType[] => {
   //   if (!products || products.length === 0) return [];
-  console.log(products);
   const bestSellers = products.filter(
     (product) => product.rating > 4 && product.reviews?.length >= 3
   );

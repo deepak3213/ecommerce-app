@@ -1,3 +1,4 @@
+"use client";
 import { useDispatch, useSelector } from "react-redux";
 import { ProductType, StateType } from "../../type";
 import {
