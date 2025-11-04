@@ -13,13 +13,12 @@ import ProductImages from "@/components/ProductImages";
 import ProductFeatures from "@/components/ProductFeatures";
 
 interface Props {
-  params: {
-    id: string;
-  };
+  params: Promise<{ id: string }>;
 }
 
 const SingleProductPage = async ({ params }: Props) => {
-  const { id } = await params;
+  const resolvedParams = await params;
+  const { id } = resolvedParams as { id: string };
   const endpoint = `https://dummyjson.com/products/${id}`;
   const product: ProductType = await getData(endpoint);
 
