@@ -1,6 +1,7 @@
 import { getData } from "@/app/(user)/helpers";
 import { getCategoriesWithCounts } from "@/app/(user)/helpers/productHelpers";
 import RoundedCategoriesCarousel from "./RoundedCategoriesCarousel";
+import { CategoryType, ProductType } from "../../../../type";
 
 // Category images mapping
 const categoryImages: { [key: string]: string } = {
@@ -94,13 +95,11 @@ interface EnhancedCategory extends ApiCategory {
 const DynamicFeaturedCategories = async () => {
   try {
     const [categoriesData, allProductsData] = await Promise.all([
-      getData("https://dummyjson.com/products/categories"),
-      getData("https://dummyjson.com/products?limit=0"),
+      getData<CategoryType[]>("https://dummyjson.com/products/categories"),
+      getData<ProductType[]>("https://dummyjson.com/products?limit=0"),
     ]);
     // Get Categories with counts;
-    const categoriesWithCounts = getCategoriesWithCounts(
-      allProductsData?.products || []
-    );
+    const categoriesWithCounts = getCategoriesWithCounts(allProductsData);
     // enhance categories  with image, description ,and counts
     const enhancedCategories: EnhancedCategory[] =
       categoriesData?.slice(0, 12)?.map((category: ApiCategory) => {

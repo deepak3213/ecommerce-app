@@ -23,8 +23,8 @@ const SingleProductPage = async ({ params }: Props) => {
 
   // Fetch related products for the same category
   const allProductsEndpoint = "https://dummyjson.com/products?limit=0";
-  const allProductsData = await getData(allProductsEndpoint);
-  const allProducts: ProductType[] = allProductsData.products || [];
+  const allProductsData = await getData<ProductType[]>(allProductsEndpoint);
+  const allProducts: ProductType[] = allProductsData || [];
 
   const regularPrice = product?.price;
   const discountedPrice = product?.price + product?.discountPercentage / 100;
