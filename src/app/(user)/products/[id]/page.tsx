@@ -6,7 +6,6 @@ import PriceFormat from "@/components/PriceFormat";
 import { FaRegEye } from "react-icons/fa";
 import { MdStar } from "react-icons/md";
 import ProductPrice from "@/components/ProductPrice";
-
 import ProductSpecifications from "@/components/ProductSpecifications";
 import RelatedProducts from "@/components/RelatedProducts";
 import ProductImages from "@/components/ProductImages";

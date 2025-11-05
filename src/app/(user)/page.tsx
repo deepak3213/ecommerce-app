@@ -4,13 +4,14 @@ import SpecialOffersBanner from "@/components/pages/home/SpecialOffersBanner";
 import { getData } from "./helpers";
 import { getBestSellers } from "./helpers/productHelpers";
 import ProductSection from "@/components/pages/home/ProductSection";
+import { ProductType } from "../../../type";
 
 export default async function Home() {
   const endpoint = `https://dummyjson.com/products?limit=0`; // Fetch all products
-  const productsData = await getData(endpoint);
-  const allProducts = productsData?.products || [];
+  const productsData = await getData<ProductType[]>(endpoint);
+
   // categorize all products
-  const bestSellers = getBestSellers(allProducts);
+  const bestSellers = getBestSellers(productsData);
 
   return (
     <main>

@@ -38,7 +38,11 @@ export interface ProductType {
   weight: number;
   quantity?: number;
 }
-
+export interface CategoryType {
+  name: string;
+  slug: string;
+  url: string;
+}
 export interface StateType {
   shopy: {
     cart: ProductType[];
